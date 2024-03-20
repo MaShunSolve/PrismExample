@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace PrismExample.ViewModels
 {
-    public class MainWindowViewModel : Customer
+    public class MainWindowViewModel : BindableBase
     {
         private ICustomerStore _customerStore = null;
 
