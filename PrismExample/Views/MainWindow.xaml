@@ -1,0 +1,53 @@
+﻿<Window x:Class="PrismExample.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PrismExample"
+        xmlns:prism="http://prismlibrary.com/"
+        prism:ViewModelLocator.AutoWireViewModel ="True"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="0.1*" />
+        </Grid.RowDefinitions>
+
+        <ListView Grid.Row="0" ItemsSource="{Binding Customers}" SelectedItem="{Binding SelectedCustomer}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Customer Number" DisplayMemberBinding="{Binding cust_no}" />
+                    <GridViewColumn Header="Customer Name" DisplayMemberBinding="{Binding cust_name}" />
+                    <!-- 其他列 -->
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button Grid.Row="1" Width="80" Height="40" Command="{Binding CommandLoad}" Content="LOAD"/>
+
+        <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="10,0">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="ID：" Margin="5"/>
+                <TextBox Text="{Binding SelectedCustomer.cust_no,UpdateSourceTrigger=PropertyChanged}" Width="200" Height="25"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="姓名：" Margin="5"/>
+                <TextBox Text="{Binding SelectedCustomer.cust_name,UpdateSourceTrigger=PropertyChanged}" Width="200" Height="25"/>
+            </StackPanel>
+            
+            <TextBlock Margin="5">
+                <Run Text="ID："/>
+                <Run Text="{Binding SelectedCustomer.cust_no}"/>
+            </TextBlock>
+            <TextBlock Margin="5">
+                <Run Text="姓名："/>
+                <Run Text="{Binding SelectedCustomer.cust_name}"/>
+            </TextBlock>
+            <Button Command="{Binding CommandAdd}" Content="Add Customer"/>
+        </StackPanel>
+    </Grid>
+</Window>
