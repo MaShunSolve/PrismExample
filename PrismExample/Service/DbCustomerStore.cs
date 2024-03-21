@@ -14,12 +14,12 @@ namespace PrismExample.Service
         /// 取資料
         /// </summary>
         /// <returns></returns>
-        public List<Customer> GetAll()
+        public List<SaveInput> GetAll()
         {
-            List<Customer> lst = new List<Customer>();
-            Customer a = new Customer() { cust_no = 1, cust_name = "客戶A"};
-            Customer b = new Customer() { cust_no = 2, cust_name = "客戶B"};
-            Customer c = new Customer() { cust_no = 3, cust_name = "客戶C"};
+            List<SaveInput> lst = new List<SaveInput>();
+            SaveInput a = new SaveInput() { cust_no = 1, cust_name = "客戶A", create_date = "20240317" };
+            SaveInput b = new SaveInput() { cust_no = 2, cust_name = "客戶B", create_date = "20240318" };
+            SaveInput c = new SaveInput() { cust_no = 3, cust_name = "客戶C", create_date = "20240319" };
             lst.Add(a);
             lst.Add(b);
             lst.Add(c);

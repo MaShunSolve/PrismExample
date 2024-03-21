@@ -9,6 +9,6 @@ namespace PrismExample.Interface
 {
     public interface ICustomerStore
     {
-        List<Customer> GetAll();
+        List<SaveInput> GetAll();
     }
 }

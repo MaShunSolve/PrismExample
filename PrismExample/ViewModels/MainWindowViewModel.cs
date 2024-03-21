@@ -14,27 +14,27 @@ using System.Threading.Tasks;
 
 namespace PrismExample.ViewModels
 {
-    public class MainWindowViewModel : BindableBase
+    public class MainWindowViewModel : Customer
     {
-        private ICustomerStore _customerStore = null;
+        private readonly ICustomerStore? _customerStore = null;
 
         public MainWindowViewModel(ICustomerStore customerStore)
         {
             _customerStore = customerStore;
         }
 
-        public ObservableCollection<Customer> Customers { get;  set; } = new ObservableCollection<Customer>();
+        public ObservableCollection<SaveInput> Customers { get;  set; } = new ObservableCollection<SaveInput>();
 
         /// <summary>
         /// 選中Item
         /// </summary>
-        private Customer _selectedCustomer = null;
-        public Customer SelectedCustomer
+        private SaveInput _selectedCustomer = null;
+        public SaveInput SelectedCustomer
         {
             get => _selectedCustomer;
             set
             {
-                if (SetProperty<Customer>(ref _selectedCustomer, value))
+                if (SetProperty<SaveInput>(ref _selectedCustomer, value))
                 {
                     Debug.WriteLine( "no customer selected");
                 }
@@ -47,7 +47,7 @@ namespace PrismExample.ViewModels
         /// </summary>
         private DelegateCommand _commandLoad = null;
         public DelegateCommand CommandLoad =>
-            _commandLoad ?? (_commandLoad = new DelegateCommand(CommandLoadExecute, ()=>CanLoad));
+            _commandLoad ?? (_commandLoad = new DelegateCommand(CommandLoadExecute));
 
         /// <summary>
         /// 執行載入
@@ -56,9 +56,12 @@ namespace PrismExample.ViewModels
         {
             CanLoad = false;
             Customers.Clear();
-            List<Customer> list = _customerStore.GetAll();//載入資料
+            List<SaveInput> list = _customerStore.GetAll();//載入資料
             foreach (var item in list)
+            { 
                 Customers.Add(item);
+                Debug.WriteLine(LoadInput.cust_id);//測試綁定
+            }
         }
 
         /// <summary>
@@ -75,7 +78,7 @@ namespace PrismExample.ViewModels
         {
             Random r = new Random();
             int cust_no = r.Next(1, 100);
-            Customer c = new Customer() { cust_no = cust_no, cust_name = $"客戶{cust_no}" }; 
+            SaveInput c = new SaveInput() { cust_no = cust_no, cust_name = $"客戶{cust_no}" }; 
             Customers.Add(c);   
           
         }
